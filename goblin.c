@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include "probably.h"
 
 void flush_input() {
   int ch;
@@ -14,7 +15,7 @@ int attackPrompt(char *enemyName, int enemyHealth) {
   fgets(attack, 20, stdin);
   flush_input();
   printf("Oh no, not the %s \n", attack);
-  myAttack = 1 + (rand() % 6);
+  myAttack = dice(6, 1);
   enemyHealth -= myAttack;
   printf("%s was dealt %d damage! \n", enemyName, myAttack);
   return myAttack;
@@ -28,7 +29,7 @@ int main(int argc, char **argv) {
   int myHealth = 20;
   while (goblinHealth > 0 && myHealth > 0) {
     goblinHealth -= attackPrompt(goblinName, goblinHealth);
-    goblinAttack = 1 + (rand() % 6);
+    goblinAttack = dice(6, 1);
     myHealth -= goblinAttack;
     printf("%s deals you %d damage! \n", goblinName, goblinAttack);
     printf("your health: %d\n", myHealth);
