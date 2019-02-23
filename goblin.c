@@ -47,5 +47,6 @@ int main(int argc, char **argv) {
   } else {
     printf("\nThe %s has killed you.\nYou died doing what you loved. \n\n", goblinName);
   }
+  free(statValues);
   return 0;
 }
