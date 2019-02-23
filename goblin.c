@@ -15,7 +15,7 @@ int attackPrompt(char *enemyName, int enemyHealth) {
   fgets(attack, 20, stdin);
   flush_input();
   printf("Oh no, not the %s \n", attack);
-  myAttack = dice(6, 1);
+  myAttack = dice(6, 2);
   enemyHealth -= myAttack;
   printf("%s was dealt %d damage! \n", enemyName, myAttack);
   return myAttack;
@@ -23,13 +23,20 @@ int attackPrompt(char *enemyName, int enemyHealth) {
 
 int main(int argc, char **argv) {
   srand(time(0));   // Initialization, should only be called once.
+  char statNames[6][13] = {"strength", "speed", "magic", "dexterity", "intelligence", "stamina"};
+  double *statValues = ndSphere(6);
+  int i;
+  for (i = 0; i < 6; i ++) {
+    printf("Your %s is %.2f.\n", statNames[i], statValues[i]);
+  }
+
   int goblinAttack;
   char goblinName[] = "Goblin";
-  int goblinHealth = 20;
-  int myHealth = 20;
+  int goblinHealth = 30;
+  int myHealth = 30;
   while (goblinHealth > 0 && myHealth > 0) {
     goblinHealth -= attackPrompt(goblinName, goblinHealth);
-    goblinAttack = dice(6, 1);
+    goblinAttack = dice(6, 2);
     myHealth -= goblinAttack;
     printf("%s deals you %d damage! \n", goblinName, goblinAttack);
     printf("your health: %d\n", myHealth);
